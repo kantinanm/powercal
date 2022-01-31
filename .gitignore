@@ -1,0 +1,37 @@
+node_modules/*
+**/*.log
+**/bower_components/*
+.DS_Store
+config.js
+**/*.bak
+
+jstools/node_modules/*
+jstools/package-lock.json
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+main/__pycache__/
+main/**/__pycache__/
+
+static/css/style.css
+static/css/style.min.css
+
+
+webapp/__pycache__/
+webapp/**/__pycache__/
+
+Pipfile.lock
+
+# Visual Studio Code # 
+# .vscode/* 
+.vscode/settings.json 
+.vscode/tasks.json 
+.vscode/launch.json 
+.vscode/extensions.json 
+.history

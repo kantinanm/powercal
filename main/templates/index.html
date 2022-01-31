@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+        {% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="antialiased ">
+    <header class="bg-gradient-to-r from-pink-300  via-purple-300  to-indigo-400 border-b md:flex md:items-center md:justify-between p-4 pb-0 shadow-lg md:pb-4">
+  
+        <!-- Logo text or image -->
+        <div class="flex items-center justify-between mb-4 md:mb-0">
+          <h1 class="leading-none text-2xl text-grey-darkest">
+            <a class="no-underline text-purple-500 hover:text-pink-700" href="#">
+                Lower-Voltage System Analysis Tools
+            </a>
+          </h1>
+      
+          <a class="text-black hover:text-orange md:hidden" href="#">
+            <i class="fa fa-2x fa-bars"></i>
+          </a>
+        </div>
+        <!-- END Logo text or image -->
+        
+        <!-- Global navigation -->
+      
+        <!-- END Global navigation -->
+      
+      </header>
+      
+      <div class="relative  md:flex ">
+
+        <!-- mobile menu bar -->
+        <div class="bg-blue-800 text-gray-100 flex justify-between md:hidden">
+          <!-- logo -->
+          <a href="#" class="block p-4 text-white font-bold">MENU</a>
+      
+          <!-- mobile menu button -->
+          <button class="mobile-menu-button p-4 focus:outline-none focus:bg-blue-700">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          
+        </div>
+      
+       <!-- sidebar -->
+         <!-- sidebar -->
+         <div class="sidebar  bg-blue-800 text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out">
+      
+          <!-- logo -->
+          <a href="#" class="text-white flex items-center space-x-2 px-4">
+            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+            <span class="text-2xl font-extrabold">ECPE</span>
+          </a>
+      
+          <!-- nav -->
+          <nav>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+              Snapshort
+            </a>
+            <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+              Time-Series
+            </a>
+            <a href="" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 hover:text-white">
+              Document
+            </a>
+          </nav>
+         <!-- nav -->
+        
+        </div>
+       <!-- sidebar -->
+      
+        <!-- content 
+        <div class="flex-1 p-10 text-2xl font-bold">
+          SnapShort simulation
+        </div>-->
+        
+        <!-- content 1 Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-5 ">
+          
+          <div>  <!-- Column 1 -->
+            <div class='flex max-w-sm w-full bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
+                <div class='w-2 bg-pink-500'></div>
+                <div class='flex items-center px-2 py-3'>
+                    <form class="w-full max-w-lg">
+                      <h1 class="text-lg text-purple-800"> Vsource </h1>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtVpu">
+                            Vp.u.
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtVpu" type="text" placeholder=" Vp.u." value="1.03">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtMVAsc">
+                            MVAsc
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtMVAsc" type="text" placeholder="MVAsc" value="500" disabled>
+                        </div>
+                      </div>
+  
+                      <hr class="mt-3"/>
+                      <h1 class="text-lg text-purple-800 mt-3"> Transformer </h1>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtTap">
+                            Tap
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtTap" type="text" placeholder="Tap" value="1.0">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtPercenZ">
+                            %Z
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtPercenZ" type="text" placeholder="" value="11.7">
+                        </div>
+                      </div>
+  
+                      <hr class="mt-3"/>
+                      <h1 class="text-lg text-purple-800 mt-3"> Line </h1>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtType">
+                            Type
+                          </label>
+                          <input type="radio" class="form-radio" name="rdoType" value="Small" checked>
+                          <span class="ml-2">Small</span>
+                          <input type="radio" class="form-radio" name="rdoType" value="Large"><span class="ml-2">Large</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtLenght">
+                            Length
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtLenght" type="text" placeholder="KM." value="3">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    </form>
+                </div>
+            </div> <!-- Column 1 -->
+          
+          
+          <div>  <!-- Column 2 -->
+            <div class='flex max-w-sm w-full bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
+                <div class='w-2 bg-indigo-600'></div>
+                <div class='flex items-center px-2 py-3'>
+                    <form class="w-full max-w-lg">
+                      <h1 class="text-lg text-purple-800 mt-3"> House : H01 </h1>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH1_pKw">
+                            P(kW)
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH1_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH1_Pf">
+                            PF
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH1_Pf" type="text" placeholder="PF" value="0.95">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3"></div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <input type="radio" class="form-radio" name="rdoH1_signPF" value="pos" checked>
+                          <span class="ml-2">(+ pos.)</span>
+                          <input type="radio" class="form-radio" name="rdoH1_signPF" value="neg"><span class="ml-2"> (- neg.)</span>
+                        </div>
+                      </div>
+                      <hr class="mt-3"/>
+                      <h1 class="text-lg text-purple-800 mt-3"> House : H02 </h1>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH2_pKw">
+                            P(kW)
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH2_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH2_Pf">
+                            PF
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH2_Pf" type="text" placeholder="PF" value="0.95">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3"></div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <input type="radio" class="form-radio" name="rdoH2_signPF" value="pos" checked>
+                          <span class="ml-2">(+ pos.)</span>
+                          <input type="radio" class="form-radio" name="rdoH2_signPF" value="neg"><span class="ml-2"> (- neg.)</span>
+                        </div>
+                      </div>
+                      <hr class="mt-3"/>
+                      <h1 class="text-lg text-purple-800 mt-3"> House : H03 </h1>
+                      <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH3_pKw">
+                            P(kW)
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH3_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH3_Pf">
+                            PF
+                          </label>
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH3_Pf" type="text" placeholder="PF" value="0.95">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3"></div>
+                        <div class="w-full md:w-1/2 px-3">
+                          <input type="radio" class="form-radio" name="rdoH3_signPF" value="pos" checked>
+                          <span class="ml-2">(+ pos.)</span>
+                          <input type="radio" class="form-radio" name="rdoH3_signPF" value="neg"><span class="ml-2"> (- neg.)</span>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    </form>
+                </div>
+            </div> <!-- Column 2 -->
+          
+          <!-- 3.example component -->  
+            <div class="flex items-start justify-start  ">
+              <div class="bg-white font-semibold text-left rounded-lg border shadow-lg p-10 max-w-xs">
+                <h1 class="text-lg text-purple-800"> PV-Battery : PV01 </h1>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtBatt_pKw">
+                      P(kW)
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtBatt_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                  </div>
+                  <div class="w-full md:w-1/2 px-3">
+                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtBatt_Pf">
+                      PF
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtBatt_Pf" type="text" placeholder="PF" value="0.95">
+                  </div>
+                  <div class="w-full md:w-1/2 px-3"></div>
+                  <div class="w-full md:w-1/2 px-3">
+                    <input type="radio" class="form-radio" name="rdoBatt_signPF" value="pos" checked>
+                    <span class="ml-2">(+)</span>
+                    <input type="radio" class="form-radio" name="rdoBatt_signPF" value="neg"><span class="ml-2"> (-)</span>
+                  </div>
+                </div>
+                  
+                <hr class="mt-3"/>
+                <h1 class="text-lg text-purple-800 mt-3"> EV car : EV01 </h1>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtEVBatt_pKw">
+                      P(kW)
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtEVBatt_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                  </div>
+                  <div class="w-full md:w-1/2 px-3">
+                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtEVBatt_Pf">
+                      PF
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtEVBatt_Pf" type="text" placeholder="PF" value="0.95">
+                  </div>
+                  <div class="w-full md:w-1/2 px-3"></div>
+                  <div class="w-full md:w-1/2 px-3">
+                    <input type="radio" class="form-radio" name="rdoEV_signPF" value="pos" checked>
+                    <span class="ml-2">(+)</span>
+                    <input type="radio" class="form-radio" name="rdoEV_signPF" value="neg"><span class="ml-2"> (-)</span>
+                  </div>
+                </div>
+                <button class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">RUN</button>
+                <button class="bg-orange-500 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">Reset</button>
+              </div>
+            </div>
+            <!-- 3.end example component -->
+
+        </div>
+        <!-- content 1 Grid -->
+      
+        <!-- content 2 Grid 
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-5 ">
+
+      </div>-->
+      <!-- content 2 Grid -->
+
+      </div><!-- relative md:flex-->
+
+</body>
+</html>
