@@ -16,7 +16,7 @@ Use powershell or cmd and type by order, please see below.
 - > After install node module finished. We compile css and build minify css.
   > `npm run build `
 - `cd ..` back to root directory
-- `pipenv shell` for activate environment
+- `pipenv shell` or `python -m pipenv shell` for activate environment
 - `pipenv install` or `pipenv install -r requirement.txt`
 
 # How to test local

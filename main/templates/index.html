@@ -9,6 +9,65 @@
     <title>Index</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+     <style>
+      .animated {
+        -webkit-animation-duration: 1s;
+        animation-duration: 1s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+      }
+  
+      .animated.faster {
+        -webkit-animation-duration: 500ms;
+        animation-duration: 500ms;
+      }
+  
+      .fadeIn {
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+      }
+  
+      .fadeOut {
+        -webkit-animation-name: fadeOut;
+        animation-name: fadeOut;
+      }
+  
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+  
+        to {
+          opacity: 1;
+        }
+      }
+  
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+  
+        to {
+          opacity: 0;
+        }
+      }
+
+
+      .loader {
+        border: 16px solid #f3f3f3; /* Light grey */
+        border-top: 16px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
 </head>
 <body class="antialiased ">
     <header class="bg-gradient-to-r from-pink-300  via-purple-300  to-indigo-400 border-b md:flex md:items-center md:justify-between p-4 pb-0 shadow-lg md:pb-4">
@@ -82,52 +141,62 @@
         <!-- content 
         <div class="flex-1 p-10 text-2xl font-bold">
           SnapShort simulation
+          flex flex-row flex-wrap
+          grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-5
+
+          flex max-w-sm w-full bg-white shadow-lg border rounded-lg overflow-hidden mx-auto
+
+          max-w-sm sm:w-1/4 md:w-2/6 lg:w-5/12
+
+          max-w-lg
         </div>-->
         
         <!-- content 1 Grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-5 ">
+  
+        <div class="flex flex-row flex-wrap ">
+         
           <div>  <!-- Column 1 -->
-            <div class='flex max-w-sm w-full bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
+            <div class='basis-1/6 bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
                 <div class='w-2 bg-pink-500'></div>
-                <div class='flex items-center px-2 py-3'>
-                    <form class="w-full max-w-lg">
+                <div class='flex items-stretch px-2 py-3'>
+                    <form class="w-full max-w-sm">
                       <h1 class="text-lg text-purple-800"> Vsource </h1>
                       <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtVpu">
                             Vp.u.
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtVpu" type="text" placeholder=" Vp.u." value="1.03">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtVpu" type="text" placeholder=" Vp.u." value="1.03">
                         </div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtMVAsc">
                             MVAsc
                           </label>
-                          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtMVAsc" type="text" placeholder="MVAsc" value="500" disabled>
+                          <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtMVAsc" type="text" placeholder="MVAsc" value="500" disabled>
                         </div>
                       </div>
   
                       <hr class="mt-3"/>
                       <h1 class="text-lg text-purple-800 mt-3"> Transformer </h1>
                       <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtTap">
                             Tap
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtTap" type="text" placeholder="Tap" value="1.0">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtTap" type="text" placeholder="Tap" value="1.0">
                         </div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtPercenZ">
                             %Z
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtPercenZ" type="text" placeholder="" value="11.7">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtPercenZ" type="text" placeholder="" value="11.7">
                         </div>
                       </div>
   
                       <hr class="mt-3"/>
                       <h1 class="text-lg text-purple-800 mt-3"> Line </h1>
                       <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtType">
                             Type
                           </label>
@@ -135,11 +204,11 @@
                           <span class="ml-2">Small</span>
                           <input type="radio" class="form-radio" name="rdoType" value="large"><span class="ml-2">Large</span>
                         </div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtLenght">
                             Length
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtLenght" type="text" placeholder="KM." value="3">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtLenght" type="text" placeholder="KM." value="3">
                         </div>
                       </div>
                       
@@ -149,27 +218,27 @@
             </div> <!-- Column 1 -->
           
           
-          <div>  <!-- Column 2 -->
-            <div class='flex max-w-sm w-full bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
+            <div><!-- Column 2 -->
+            <div class='basis-1/6 bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
                 <div class='w-2 bg-indigo-600'></div>
-                <div class='flex items-center px-2 py-3'>
-                    <form class="w-full max-w-lg">
+                <div class='flex items-stretch px-2 py-3'>
+                    <form class="w-full max-w-sm">
                       <h1 class="text-lg text-purple-800 mt-3"> House : H01 </h1>
                       <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH1_pKw">
                             P(kW)
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH1_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtH1_pKw" type="text" placeholder=" P(kW)" value="1.03">
                         </div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH1_Pf">
                             PF
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH1_Pf" type="text" placeholder="PF" value="0.95">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtH1_Pf" type="text" placeholder="PF" value="0.95">
                         </div>
                         <div class="w-full md:w-1/2 px-3"></div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <input type="radio" class="form-radio" name="rdoH1_signPF" value="pos" checked>
                           <span class="ml-2">(+ pos.)</span>
                           <input type="radio" class="form-radio" name="rdoH1_signPF" value="neg"><span class="ml-2"> (- neg.)</span>
@@ -178,20 +247,20 @@
                       <hr class="mt-3"/>
                       <h1 class="text-lg text-purple-800 mt-3"> House : H02 </h1>
                       <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH2_pKw">
                             P(kW)
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH2_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtH2_pKw" type="text" placeholder=" P(kW)" value="1.03">
                         </div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH2_Pf">
                             PF
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH2_Pf" type="text" placeholder="PF" value="0.95">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtH2_Pf" type="text" placeholder="PF" value="0.95">
                         </div>
-                        <div class="w-full md:w-1/2 px-3"></div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3"></div>
+                        <div class="w-full sm:w-1/2 px-3">
                           <input type="radio" class="form-radio" name="rdoH2_signPF" value="pos" checked>
                           <span class="ml-2">(+ pos.)</span>
                           <input type="radio" class="form-radio" name="rdoH2_signPF" value="neg"><span class="ml-2"> (- neg.)</span>
@@ -200,20 +269,20 @@
                       <hr class="mt-3"/>
                       <h1 class="text-lg text-purple-800 mt-3"> House : H03 </h1>
                       <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH3_pKw">
                             P(kW)
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH3_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtH3_pKw" type="text" placeholder=" P(kW)" value="1.03">
                         </div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3">
                           <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtH3_Pf">
                             PF
                           </label>
-                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtH3_Pf" type="text" placeholder="PF" value="0.95">
+                          <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtH3_Pf" type="text" placeholder="PF" value="0.95">
                         </div>
-                        <div class="w-full md:w-1/2 px-3"></div>
-                        <div class="w-full md:w-1/2 px-3">
+                        <div class="w-full sm:w-1/2 px-3"></div>
+                        <div class="w-full sm:w-1/2 px-3">
                           <input type="radio" class="form-radio" name="rdoH3_signPF" value="pos" checked>
                           <span class="ml-2">(+ pos.)</span>
                           <input type="radio" class="form-radio" name="rdoH3_signPF" value="neg"><span class="ml-2"> (- neg.)</span>
@@ -223,76 +292,234 @@
                     </div>
                     </form>
                 </div>
-            </div> <!-- Column 2 -->
+             </div><!-- Column 2 -->
           
           <!-- 3.example component -->  
-            <div class="flex items-start justify-start  ">
-              <div class="bg-white font-semibold text-left rounded-lg border shadow-lg p-10 max-w-xs">
-                <h1 class="text-lg text-purple-800"> PV-Battery : PV01 </h1>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtBatt_pKw">
-                      P(kW)
-                    </label>
-                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtBatt_pKw" type="text" placeholder=" P(kW)" value="1.03">
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtBatt_Pf">
-                      PF
-                    </label>
-                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtBatt_Pf" type="text" placeholder="PF" value="0.95">
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <input type="radio" class="form-radio" name="rdoBatt_signPkw" value="pos" checked>
-                    <span class="ml-2">(+)</span>
-                    <input type="radio" class="form-radio" name="rdoBatt_signPkw" value="neg"><span class="ml-2"> (-)</span>
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <input type="radio" class="form-radio" name="rdoBatt_signPF" value="pos" checked>
-                    <span class="ml-2">(+)</span>
-                    <input type="radio" class="form-radio" name="rdoBatt_signPF" value="neg"><span class="ml-2"> (-)</span>
-                  </div>
+          <div>  <!-- Column 2 -->
+            <div class='basis-1/6 bg-white shadow-lg border rounded-lg overflow-hidden mx-auto'>
+                <div class='w-2 bg-indigo-600'></div>
+                <div class='flex items-center px-2 py-3'>
+                  <form class="w-full max-w-sm">
+                   
+                    <h1 class="text-lg text-purple-800"> PV-Battery : PV01 </h1>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtBatt_pKw">
+                          P(kW)
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtBatt_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                      </div>
+                      <div class="w-full sm:w-1/2 px-3">
+                        <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtBatt_Pf">
+                          PF
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtBatt_Pf" type="text" placeholder="PF" value="0.95">
+                      </div>
+                      <div class="w-full sm:w-1/2 px-3">
+                        <input type="radio" class="form-radio" name="rdoBatt_signPkw" value="pos" checked>
+                        <span class="ml-2">(+)</span>
+                        <input type="radio" class="form-radio" name="rdoBatt_signPkw" value="neg"><span class="ml-2"> (-)</span>
+                      </div>
+                      <div class="w-full sm:w-1/2 px-3">
+                        <input type="radio" class="form-radio" name="rdoBatt_signPF" value="pos" checked>
+                        <span class="ml-2">(+)</span>
+                        <input type="radio" class="form-radio" name="rdoBatt_signPF" value="neg"><span class="ml-2"> (-)</span>
+                      </div>
+                    </div>
+                    <hr class="mt-3"/>
+                    <h1 class="text-lg text-purple-800 mt-3"> EV car : EV01 </h1>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full sm:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtEVBatt_pKw">
+                          P(kW)
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtEVBatt_pKw" type="text" placeholder=" P(kW)" value="1.03">
+                      </div>
+                      <div class="w-full sm:w-1/2 px-3">
+                        <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtEVBatt_Pf">
+                          PF
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-orange-600" id="txtEVBatt_Pf" type="text" placeholder="PF" value="0.95">
+                      </div>
+                      <div class="w-full sm:w-1/2 px-3">
+                        <input type="radio" class="form-radio" name="rdoEV_signPkw" value="pos" checked>
+                        <span class="ml-2">(+)</span>
+                        <input type="radio" class="form-radio" name="rdoEV_signPkw" value="neg"><span class="ml-2"> (-)</span>
+                      </div>
+                      <div class="w-full sm:w-1/2 px-3">
+                        <input type="radio" class="form-radio" name="rdoEV_signPF" value="pos" checked>
+                        <span class="ml-2">(+)</span>
+                        <input type="radio" class="form-radio" name="rdoEV_signPF" value="neg"><span class="ml-2"> (-)</span>
+                      </div>
+                    </div>
+
+                    <button class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide" id="btnRUN">RUN</button>
+                    <button class="bg-orange-500 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">Reset</button>
+                  </form>
                 </div>
+              </div>
+          </div>
+
+
+          <div class="flex items-stretch max-w-xl px-2 py-3">
+            <div class="rounded-lg shadow-lg bg-white border overflow-hidden mx-auto">
+
+                <img class="rounded-t-lg" src="{% static 'images/Test_system.png' %}" alt=""/>
+              
+              <div class="p-4">
+                <span class="text-3xl text-purple-800 mt-3"> Output </span>
+                <div class="grid grid-cols-3 gap-1">
+                  <div id="col1" > 
+                    <!-- col1 -->
+                    <span class="text-sm font-bold text-orange-700 mt-3 mb-3"> LV </span>
+                    <div class="card m-1 border border-gray-400 rounded-lg hover:shadow-md bg-lime-200 ">
+                    
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">V1(pu) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultLVV1" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">V2(pu) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultLVV2" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">V3(pu) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultLVV3" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div> <!-- col1 -->
+                  <div id="col2"><!-- col2 -->
+                    <span class="text-sm font-bold text-orange-700 mt-3 mb-3"> Line </span>
+                    <div class="card m-1 border border-gray-400 rounded-lg hover:shadow-md bg-lime-200 ">
+                    
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">P1(kW) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultP1kw" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">P2(kW) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultP2kw" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">P3(kW) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultP3kw" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                   
-                <hr class="mt-3"/>
-                <h1 class="text-lg text-purple-800 mt-3"> EV car : EV01 </h1>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                  <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtEVBatt_pKw">
-                      P(kW)
-                    </label>
-                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtEVBatt_pKw" type="text" placeholder=" P(kW)" value="1.03">
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="txtEVBatt_Pf">
-                      PF
-                    </label>
-                    <input class="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="txtEVBatt_Pf" type="text" placeholder="PF" value="0.95">
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <input type="radio" class="form-radio" name="rdoEV_signPkw" value="pos" checked>
-                    <span class="ml-2">(+)</span>
-                    <input type="radio" class="form-radio" name="rdoEV_signPkw" value="neg"><span class="ml-2"> (-)</span>
-                  </div>
-                  <div class="w-full md:w-1/2 px-3">
-                    <input type="radio" class="form-radio" name="rdoEV_signPF" value="pos" checked>
-                    <span class="ml-2">(+)</span>
-                    <input type="radio" class="form-radio" name="rdoEV_signPF" value="neg"><span class="ml-2"> (-)</span>
-                  </div>
+                  </div><!-- col2 -->
+
+                  <div id="col3"><!-- col3 -->
+                    <span class="text-sm font-bold text-orange-700 mt-3 mb-3"> PCC </span>
+                    <div class="card m-1 border border-gray-400 rounded-lg hover:shadow-md bg-lime-200 ">
+                    
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">V1(pu) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultPCCV1" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">V2(pu) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultPCCV2" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">V3(pu) =</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultPCCV3" class="text-orange-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- col1 -->
                 </div>
-                <button class="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide" id="btnRUN">RUN</button>
-                <button class="bg-orange-500 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">Reset</button>
               </div>
             </div>
-            <!-- 3.end example component -->
+          </div>
 
-        </div>
+
+     
+        </div>   
         <!-- content 1 Grid -->
       
-        <!-- content 2 Grid 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-5 ">
+        <!-- content 2 Grid -->
+ 
+        <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
+        style="background: rgba(0,0,0,.7);">
+        <div
+          class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded z-50 overflow-y-auto">
+          <div class="modal-content py-4 text-left px-6">
+            <!--Title-->
+            <div class="flex justify-between items-center pb-3">
+              <p class="text-2xl font-bold">Notification</p>
+              <div class="modal-close cursor-pointer z-50">
+                <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                  viewBox="0 0 18 18">
+                  <path
+                    d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <!--Body-->
+            <div class="my-5">
 
-      </div>-->
+              <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <div class="loader"></div>
+                </div>
+                <div class="w-full md:w-1/2 px-3">
+                <div id ="resultLVV1" class="text-orange-700 text-lg"> กำลังประมวลผล... </div>
+                </div>
+              </div>
+
+            </div>
+            <!--Footer-->
+            <div class="flex justify-end pt-2">
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- content 2 Grid -->
 
       </div><!-- relative md:flex-->
@@ -307,9 +534,44 @@
       request to server and after successfull submission
       display the object.
   */
+
+    const modal = document.querySelector('.main-modal');
+    const closeButton = document.querySelectorAll('.modal-close');
+
+    const modalClose = () => {
+      modal.classList.remove('fadeIn');
+      modal.classList.add('fadeOut');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 500);
+    }
+
+    const openModal = () => {
+      modal.classList.remove('fadeOut');
+      modal.classList.add('fadeIn');
+      modal.style.display = 'flex';
+    }
+
+    for (let i = 0; i < closeButton.length; i++) {
+
+      const elements = closeButton[i];
+
+      elements.onclick = (e) => modalClose();
+
+      modal.style.display = 'none';
+
+      window.onclick = function (event) {
+        if (event.target == modal) modalClose();
+      }
+    }
+
   $("#btnRUN").click(function (e) {
       // preventing from page reload and default actions
       e.preventDefault();
+      openModal();
+      setTimeout(() => {
+        document.querySelector('.main-modal').style.display = 'none';
+      }, 2000);
       // serialize the data for sending the form data.
       //var serializedData = $(this).serialize();
       //data: JSON.stringify(somedata), 
@@ -355,6 +617,19 @@
       [name]
       rdoEV_signPF       sgEVBattPF
 
+
+      result
+      resultLVV1
+      resultLVV2
+      resultLVV3
+
+      resultP1kw
+      resultP2kw
+      resultP3kw
+
+      resultPCCV1
+      resultPCCV2
+      resultPCCV3
 
       */
       console.log("click")

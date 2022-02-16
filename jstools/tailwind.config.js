@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ["Kanit", "sans-serif"],
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      }
     },
   },
   variants: {},
