@@ -632,20 +632,60 @@
       resultPCCV3
 
       */
-      console.log("click")
+      console.log("click");
+      console.log("click"+$("#txtVpu").val());
+      
+      var formData = {
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        vpu: $("#txtVpu").val(),
+        fixmvasc: $("#txtMVAsc").val(),
+        tab: $("#txtTap").val(),
+        percenz: $("#txtPercenZ").val(),
+        type: $('input[name="rdoType"]:checked').val(),
+        length: $("#txtLenght").val(),
 
-      $.ajax({
-          type: 'POST',
+        h01_kw: $("#txtH1_pKw").val(),
+        h01_pf: $("#txtH1_Pf").val(),
+        sg01pf: $('input[name="rdoH1_signPF"]:checked').val(),
+
+        h02_kw: $("#txtH2_pKw").val(),
+        h02_pf: $("#txtH2_Pf").val(),
+        sg02pf: $('input[name="rdoH2_signPF"]:checked').val(),
+
+        h03_kw: $("#txtH3_pKw").val(),
+        h03_pf: $("#txtH3_Pf").val(),
+        sg03pf: $('input[name="rdoH3_signPF"]:checked').val(),
+
+        batt_kw: $("#txtBatt_pKw").val(),
+        batt_pf: $("#txtBatt_Pf").val(),
+        sgBattPkw: $('input[name="rdoBatt_signPkw"]:checked').val(),
+        sgBattPF: $('input[name="rdoBatt_signPF"]:checked').val(),
+
+
+        evBattKw: $("#txtEVBatt_pKw").val(),
+        evBattPf: $("#txtEVBatt_Pf").val(),
+        sgEVBattPkw: $('input[name="rdoEV_signPkw"]:checked').val(),
+        sgEVBattPF: $('input[name="rdoEV_signPF"]:checked').val(),
+
+      };
+
+
+       /*$.post("{% url 'process_backend' %}", { 
           headers:{
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val(),
           },
+           item_text: data,
+           csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+       });*/
+
+      
+      $.ajax({
+          type: 'POST',
           url: "{% url 'process_backend' %}",
-          data: {
-            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-          },
+          data: formData,
           success: function (response) {
               // on successfull 
               //alert(response["responseJSON"]["success"])
@@ -657,6 +697,7 @@
               //alert(response["responseJSON"]["error"])
           }
       })
+      
   })
 </script>
 </html>
