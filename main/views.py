@@ -72,7 +72,12 @@ async def process_backend(request):
             "sgEVBattPF":sgEVBattPF,
         }
 
-        await calculate(postData);
+        await calculate(postData)
+        task1 =asyncio.create_task(calculate(postData))
+
+        resultFile= await task1
+        #return result to json format
+        #print fileName
 
 
         return JsonResponse({"success": "test","data":postData}, status=200)
@@ -87,5 +92,8 @@ def is_ajax(request):
 async def calculate(data):
     print("this calculate data.")
     print(data)
-
     return JsonResponse({"success": "calculate()","data":data}, status=200)
+
+async def callOpenDSS(data):
+    print("this call OpenDSS Engine.")
+    print(data)
