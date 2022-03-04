@@ -1,9 +1,19 @@
 import re
+import os
 import asyncio
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
-
+import win32com.client 
+import dss
+import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection
+from matplotlib.colors import ColorConverter
+import matplotlib.path as mpath
+import matplotlib.text as text
+import matplotlib.patches  as patches
+import numpy as np
+import json
 
 # Create your views here.
 def index(request):
@@ -72,15 +82,18 @@ async def process_backend(request):
             "sgEVBattPF":sgEVBattPF,
         }
 
-        await calculate(postData)
-        task1 =asyncio.create_task(calculate(postData))
+        #await calculate(postData)
+        task1 =asyncio.create_task(callOpenDSS(postData))
 
         resultFile= await task1
+        json_object = json.loads(resultFile)
+
         #return result to json format
         #print fileName
 
+        print(resultFile)
 
-        return JsonResponse({"success": "test","data":postData}, status=200)
+        return JsonResponse({"success": "test","data":postData,"fileName":json_object["filename"]}, status=200)
     return JsonResponse({"error": "error-msg"}, status=400)
 
 def demo(request):
@@ -95,5 +108,57 @@ async def calculate(data):
     return JsonResponse({"success": "calculate()","data":data}, status=200)
 
 async def callOpenDSS(data):
+    #dssObj = win32com.client.Dispatch("OpenDSSEngine.DSS")
+    #dss_engine = dss.DSS
+    #dss_engine.Text.Command = "compile d:/Work/OpenDSS/TestOV2.dss"
+
+    dir_name = "D:/Work/Python/powercal/static/images/"
+
+    plt.rcParams["savefig.directory"] = os.chdir(os.path.dirname(dir_name))
+
+    verts = [
+   (0., 1.0297),   # P0
+   (3., 1.0184),  # P1
+   (0., 1.0286),  # P2
+   (3., 0.9949),  # P3
+    ]
+
+    codes = [
+        mpath.Path.MOVETO,
+        mpath.Path.MOVETO,
+        mpath.Path.MOVETO,
+        mpath.Path.MOVETO,
+    ]
+
+    path = mpath.Path(verts, codes)
+
+    fig, ax = plt.subplots()
+    patch = patches.PathPatch(path, facecolor='none', lw=2)
+    ax.add_patch(patch)
+
+    xs, ys = zip(*verts)
+    ax.plot(xs, ys, 'x--', lw=2, color='black', ms=10)
+
+    #ax.set_xlim(-0.1, 1.1)
+    #ax.set_ylim(-0.1, 1.1)
+
+    #plt.style.use('seaborn-whitegrid')
+    #xpoints = np.array([0, 6])
+    #ypoints = np.array([0, 250])
+
+    #plt.plot(xpoints, ypoints)
+    #plt.show()
+    title="chart-python"
+    #plt.xlabel("n iteration")
+    #plt.legend(loc='upper left')
+    #plt.title(title)
+    plt.savefig(title+".png",dpi = 150)  # should before plt.show method
+    plt.close()
+    #plt.show()
+
+    result={'filename': title+".png"}
+    await  asyncio.sleep(3)
+
     print("this call OpenDSS Engine.")
     print(data)
+    return  json.dumps(result)

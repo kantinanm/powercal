@@ -476,7 +476,11 @@
             </div>
           </div>
 
-
+          <div class="flex items-stretch max-w-xl px-2 py-3">
+            <div class="rounded-lg shadow-lg bg-white border overflow-hidden mx-auto">
+		          <img id="chart_img" class="rounded-t-lg" src="{% static 'images/chart-python.png' %}" alt="" style="display: none;"/>
+            </div>
+          </div>
      
         </div>   
         <!-- content 1 Grid -->
@@ -571,7 +575,7 @@
       openModal();
       setTimeout(() => {
         document.querySelector('.main-modal').style.display = 'none';
-      }, 2000);
+      }, 3000);
       // serialize the data for sending the form data.
       //var serializedData = $(this).serialize();
       //data: JSON.stringify(somedata), 
@@ -690,6 +694,7 @@
               // on successfull 
               //alert(response["responseJSON"]["success"])
               console.log(response)
+              $("#chart_img").show();
           },
           error: function (response) {
               // alert the error if any error occured

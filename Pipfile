@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = "*"
+dss-python = "*"
+pypiwin32 = "*"
+matplotlib = "*"
+numpy = "*"
 
 [dev-packages]
 
