@@ -35,3 +35,5 @@ Pipfile.lock
 .vscode/launch.json 
 .vscode/extensions.json 
 .history
+
+.env

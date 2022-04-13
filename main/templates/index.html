@@ -478,7 +478,8 @@
 
           <div class="flex items-stretch max-w-xl px-2 py-3">
             <div class="rounded-lg shadow-lg bg-white border overflow-hidden mx-auto">
-		          <img id="chart_img" class="rounded-t-lg" src="{% static 'images/chart-python.png' %}" alt="" style="display: none;"/>
+		         <img id="chart_img" class="rounded-t-lg"  alt="" style="display: none;"/>
+             <!-- <canvas id="canvas-chart" class="rounded-t-lg" style="display: none;"></canvas>-->
             </div>
           </div>
      
@@ -693,8 +694,27 @@
           success: function (response) {
               // on successfull 
               //alert(response["responseJSON"]["success"])
-              console.log(response)
-              $("#chart_img").show();
+              console.log('result return');
+              console.log(response.raw);
+              console.log(response);
+              //$("#chart_img").show();
+              
+              //var ctx = document.getElementById('canvas-chart').getContext('2d');
+
+              if (response.raw) {
+                /*var img = new Image();
+                img.onload = function() {
+                    //ctx.drawImage(img, 0, 0);
+                };
+                img.src = "{% static 'images/' %}"+response.fileName;*/
+                //img.src = "'data:image/  png;base64," + response.raw+"'";
+                //$("#canvas-chart").show();
+
+                $("#chart_img").attr("src","{% static 'images/' %}"+response.fileName);
+                $("#chart_img").show();
+        
+              }
+
           },
           error: function (response) {
               // alert the error if any error occured
