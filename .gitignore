@@ -21,6 +21,8 @@ main/**/__pycache__/
 
 static/css/style.css
 static/css/style.min.css
+static/images/solve/
+dss/*
 
 
 webapp/__pycache__/

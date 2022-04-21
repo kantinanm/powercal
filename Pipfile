@@ -9,6 +9,7 @@ dss-python = "*"
 pypiwin32 = "*"
 matplotlib = "*"
 numpy = "*"
+django-environ = "*"
 
 [dev-packages]
 autopep8 = "*"

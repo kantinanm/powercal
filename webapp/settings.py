@@ -132,3 +132,4 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"), )
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CHART_PATH=env('CHART_PATH')
+DSS_PATH=env('DSS_PATH')

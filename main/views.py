@@ -17,7 +17,7 @@ import json
 from django.conf import settings
 import base64
 from datetime import datetime
-
+from main.utility import *
 # Create your views here.
 
 
@@ -88,25 +88,33 @@ async def process_backend(request):
             "sgEVBattPF": sgEVBattPF,
         }
 
+        dss_path = getattr(settings, "DSS_PATH", None) #get path
         # await calculate(postData)
-        task1 = asyncio.create_task(callOpenDSS(postData))
+        # writeDSSFile(data)
+        task1 = asyncio.create_task(writeDSSFile(postData,dss_path))
+        raw_output = await task1
+        json_output = json.loads(raw_output)
 
-        resultFile = await task1
-        json_object = json.loads(resultFile)
+        print('DSS File '+json_output["filename"])
+        
+        if(json_output["status"]):
+            task2 = asyncio.create_task(callOpenDSS(postData))
+            resultFile = await task2
+            json_object = json.loads(resultFile)
+            # get path
+            image_path = getattr(settings, "CHART_PATH", None)
+            #convert jpec to hex rawdata
+            with open(image_path+json_object["filename"], "rb") as image_file:
+                image_data = base64.b64encode(image_file.read()).decode('utf-8')
+              # return result to json format
+            return JsonResponse({"success": "test", "data": postData, "fileName": json_object["filename"], "raw": image_data}, status=200)
 
-        image_path = getattr(settings, "CHART_PATH", None)
+        else:
+            print("Problem in create DSS file.")
+              # return result to json format
+            return JsonResponse({"error": "Problem in create DSS file."}, status=400)
 
-        with open(image_path+json_object["filename"], "rb") as image_file:
-            image_data = base64.b64encode(image_file.read()).decode('utf-8')
-
-        # return result to json format
-        # print fileName
-
-        # print(resultFile)
-
-        return JsonResponse({"success": "test", "data": postData, "fileName": json_object["filename"], "raw": image_data}, status=200)
-    return JsonResponse({"error": "error-msg"}, status=400)
-
+    return JsonResponse({"error": "bad-request-method"}, status=200)
 
 def demo(request):
     return render(request, 'demo.html')
@@ -127,6 +135,9 @@ async def callOpenDSS(data):
     #dss_engine = dss.DSS
     #dss_engine.Text.Command = "compile d:/Work/OpenDSS/TestOV2.dss"
 
+
+    
+    
     dir_name = getattr(settings, "CHART_PATH", None)
     #dir_name = "D:/Work/Git/Python/powercal/static/images/"
 
@@ -181,3 +192,4 @@ async def callOpenDSS(data):
     print("this call OpenDSS Engine.")
     print(data)
     return json.dumps(result)
+
