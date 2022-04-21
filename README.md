@@ -19,6 +19,12 @@ Use powershell or cmd and type by order, please see below.
 - `pipenv shell` or `python -m pipenv shell` for activate environment
 - `pipenv install` or `pipenv install -r requirement.txt`
 
+# How to update env
+
+Use powershell or cmd and type by order, please see below.
+- `pipenv update `
+
+
 # How to test local
 
 - `python manage.py runserver`
