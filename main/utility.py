@@ -1,5 +1,10 @@
 from datetime import datetime
 import json
+import pandas as pd
+from django.conf import settings
+import time
+import numpy as numpy
+import csv as csv
 
 
 async def writeDSSFile(data,path):
@@ -73,5 +78,59 @@ async def writeDSSFile(data,path):
   
 
     print(data)
-    result = {'status': True,'filename':fileName}
+    result = {'status': True,'filename':fileName,'timestamp':date_time}
+    return json.dumps(result)
+
+async def readResult(exp_voltages_file):
+    print("this process for read csv file.")
+    path = getattr(settings, "CSV_PATH", None) #get path
+
+    #'D:/Work/OpenDSS/'+exp_voltages_file,
+    #path+exp_voltages_file, 
+    df = pd.read_csv(
+        'D:/Work/OpenDSS/exp_voltages.csv',
+        nrows=4, delimiter = ",",
+        low_memory = True
+    )
+
+    #df['Bus'] = df['Bus'].astype(str)
+    #df['pu1'] = df['pu1'].astype(float)
+    #df['pu2'] = df['pu2'].astype(float)
+    #df['pu3'] = df['pu3'].astype(float)
+
+    print('Method 2: Starting Experiment')
+    # timer starts
+    start = time.time()
+    # display information
+    print('Show Infos:')
+    df.info()
+    print('')
+    print('Show Top Three Rows')
+    print(df.head(-3))
+
+
+    lv_lv1_pu=df.iloc[1,5]
+    lv_lv2_pu=df.iloc[1,9]
+    lv_lv3_pu=df.iloc[1,13]
+
+    pcc_v1_pu=df.iloc[2,5]
+    pcc_v2_pu=df.iloc[2,9]
+    pcc_v3_pu=df.iloc[2,13]
+
+    print(f'LV: V1(pu) : {lv_lv1_pu}')
+    print(f'LV: V2(pu) : {lv_lv2_pu}')
+    print(f'LV: V3(pu) : {lv_lv3_pu}')
+
+    print(f'PCC: V1(pu) : {pcc_v1_pu}')
+    print(f'PCC: V2(pu) : {pcc_v2_pu}')
+    print(f'PCC: V3(pu) : {pcc_v3_pu}')
+
+    lv = {'V1': lv_lv1_pu, 'V2': lv_lv2_pu, 'V3': lv_lv3_pu}
+    pcc = {'V1': pcc_v1_pu, 'V2': pcc_v2_pu, 'V3': pcc_v3_pu}
+
+    # timer ends
+    end = time.time()
+    print('\nExperiment Completed\nTotal Time: {:.2f} seconds'.format(end-start))
+
+    result = {'status': True,'output_lv':lv,'output_pcc':pcc}
     return json.dumps(result)

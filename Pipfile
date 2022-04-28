@@ -10,6 +10,7 @@ pypiwin32 = "*"
 matplotlib = "*"
 numpy = "*"
 django-environ = "*"
+pandas = "*"
 
 [dev-packages]
 autopep8 = "*"

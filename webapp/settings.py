@@ -133,3 +133,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CHART_PATH=env('CHART_PATH')
 DSS_PATH=env('DSS_PATH')
+CSV_PATH=env('CSV_PATH')
+
