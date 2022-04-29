@@ -379,7 +379,7 @@
                           <span class="text-orange-700">V1(pu) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultLVV1" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultLVV1" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
 
@@ -388,7 +388,7 @@
                           <span class="text-orange-700">V2(pu) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultLVV2" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultLVV2" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
 
@@ -397,7 +397,7 @@
                           <span class="text-orange-700">V3(pu) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultLVV3" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultLVV3" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
                     </div>
@@ -412,7 +412,7 @@
                           <span class="text-orange-700">P1(kW) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultP1kw" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultP1kw" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
 
@@ -421,7 +421,7 @@
                           <span class="text-orange-700">P2(kW) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultP2kw" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultP2kw" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
 
@@ -430,7 +430,7 @@
                           <span class="text-orange-700">P3(kW) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultP3kw" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultP3kw" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
                     </div>
@@ -448,7 +448,7 @@
                           <span class="text-orange-700">V1(pu) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultPCCV1" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultPCCV1" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
 
@@ -457,7 +457,7 @@
                           <span class="text-orange-700">V2(pu) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultPCCV2" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultPCCV2" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
 
@@ -466,7 +466,7 @@
                           <span class="text-orange-700">V3(pu) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
-                        <div id ="resultPCCV3" class="text-orange-700 text-lg">  ? </div>
+                        <div id ="resultPCCV3" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
                     </div>
@@ -712,6 +712,18 @@
 
                 $("#chart_img").attr("src","{% static 'images/solve/' %}"+response.fileName);
                 $("#chart_img").show();
+
+                $("#resultLVV1").html(response.output_lv.V1);
+                $("#resultLVV2").html(response.output_lv.V2);
+                $("#resultLVV3").html(response.output_lv.V3);
+
+                //$("#resultP1kw").html(response.output_line.V1);
+                //$("#resultP2kw").html(response.output_line.V2);
+                //$("#resultP3kw").html(response.output_line.V3);
+
+                $("#resultPCCV1").html(response.output_pcc.V1);
+                $("#resultPCCV2").html(response.output_pcc.V2);
+                $("#resultPCCV3").html(response.output_pcc.V3);
         
               }
 
