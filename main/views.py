@@ -4,7 +4,7 @@ import asyncio
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core import serializers
-
+import base64
 import json
 from django.conf import settings
 
@@ -93,7 +93,7 @@ async def process_backend(request):
             with open(image_path+json_object["filename"], "rb") as image_file:
                 image_data = base64.b64encode(image_file.read()).decode('utf-8')
               # return result to json format
-                return JsonResponse({"success": "test", "data": postData,"output_lv": json_object["output_lv"],"output_pcc": json_object["output_pcc"],  "fileName": json_object["filename"], "raw": image_data}, status=200)
+                return JsonResponse({"success": "test", "data": postData,"output_lv": json_object["output_lv"],"output_pcc": json_object["output_pcc"],"line": json_object["line"],"kilojoule": json_object["kilojoule"],"output_line": json_object["output_line"],  "fileName": json_object["filename"], "raw": image_data}, status=200)
 
         else:
                 print("Problem in create DSS file.")

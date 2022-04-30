@@ -1,10 +1,11 @@
 from datetime import datetime
 import asyncio
 import json
+#from turtle import end_fill
 import pandas as pd
 from django.conf import settings
 import time
-import csv as csv
+#import csv as csv
 import win32com.client
 #import dss
 import pythoncom
@@ -14,16 +15,16 @@ matplotlib.use('Agg') #WebAgg
 import matplotlib.pyplot as plt
 plt.switch_backend('Agg') 
 
-from matplotlib.collections import LineCollection
-from matplotlib.colors import ColorConverter
+#from matplotlib.collections import LineCollection
+#from matplotlib.colors import ColorConverter
 import matplotlib.path as mpath
-import matplotlib.text as text
+#import matplotlib.text as text
 import matplotlib.patches as patches
 
-import numpy as np
-import base64
+#import numpy as np
+#import base64
 import os
-from io import BytesIO
+#from io import BytesIO
 
 async def writeDSSFile(data,path):
     print("this process for write DSS file.")
@@ -95,8 +96,57 @@ async def writeDSSFile(data,path):
     print(fileName+"File has been created.")
     result = {'status': True,'filename':fileName,'timestamp':date_time}
     return json.dumps(result)
+async def readResultPphase(p_phases_file):
+    print("this process for read data from "+p_phases_file+" file.")
+    path = getattr(settings, "CSV_PATH", None) #get path
 
+    #'D:/Work/OpenDSS/'+exp_voltages_file,
+    #path+exp_voltages_file, 
+    df = pd.read_csv(
+        path+p_phases_file,
+        nrows=7, delimiter = ",",
+        low_memory = True
+    )
+    #df['Bus'] = df['Bus'].astype(str)
+    #df['pu1'] = df['pu1'].astype(float)
+    #df['pu2'] = df['pu2'].astype(float)
+    #df['pu3'] = df['pu3'].astype(float)
+
+    print('Method 2: Starting Experiment')
+    # timer starts
+    start = time.time()
+    # display information
+    print('Show Infos:')
+    df.info()
+    print('')
+    print('Show Top Seven Rows')
+    print(df.head(7))
+
+    kw1=df.iloc[0,3]
+    kw2=df.iloc[0,5]
+    kw3=df.iloc[0,7]
+
+    pv1_joule=df.iloc[0,4]
+    pv2_joule=df.iloc[0,6]
+    pv3_joule=df.iloc[0,8]
+
+    print(f'Line PV1 : {kw1},{pv1_joule}')
+    print(f'Line PV2 : {kw2},{pv2_joule}')
+    print(f'Line PV3 : {kw3},{pv3_joule}')
+
+
+    line = {'PV1': kw1, 'PV2': kw2, 'PV3': kw3}
+    kilojoule  = {'PV1': pv1_joule, 'PV2': pv2_joule, 'PV3': pv3_joule}
+    #output_line = {'PV1': kw1+", "+pv1_joule+" joule", 'PV2': kw2+", "+pv2_joule+" joule", 'PV3': kw3+", "+pv3_joule+" joule"}
+    output_line={}
+    # timer ends
+    end = time.time()
+    print('\nExperiment Completed\nTotal Time: {:.2f} seconds'.format(end-start))
+
+    result = {'status': True,'line':line,'kilojoule':kilojoule,'output_line':output_line}
+    return json.dumps(result)
 async def readResult(exp_voltages_file):
+    
     print("this process for read data from "+exp_voltages_file+" file.")
     path = getattr(settings, "CSV_PATH", None) #get path
 
@@ -121,7 +171,7 @@ async def readResult(exp_voltages_file):
     df.info()
     print('')
     print('Show Top Three Rows')
-    print(df.head(-3))
+    print(df.head(3))
 
 
     lv_lv1_pu=df.iloc[1,5]
@@ -336,8 +386,30 @@ async def callOpenDSS(data,timestamp):
         #json_rsoutput["status"]=="success"
 
         if(json_rsoutput["status"]=="success"):
+            
+            #read result
+            task4 = asyncio.create_task(readResultPphase(p_byPhases_csv_name))
+            result = await task4
+            rsoutput = json.loads(result)
+
+            line=[]
+            kilojoule=[]
+            output_line=[]
+            
+            if(rsoutput["status"]):
+                print("result is OK : back form Utility")
+                print("You can see.")
+                print(rsoutput["line"])
+                print(rsoutput["kilojoule"])
+                print(rsoutput["output_line"])
+
+                line=rsoutput["line"]
+                kilojoule=rsoutput["kilojoule"]
+                output_line=rsoutput["output_line"]
+
+
             #success
-            result = {'status':'success','filename': json_rsoutput["filename"],'voltages_csv_file': voltages_csv_name,'p_byPhase_csv_file': p_byPhases_csv_name,'output_lv':data_lv,'output_pcc':data_pcc}
+            result = {'status':'success','filename': json_rsoutput["filename"],'voltages_csv_file': voltages_csv_name,'p_byPhase_csv_file': p_byPhases_csv_name,'output_lv':data_lv,'output_pcc':data_pcc,'line':line,'kilojoule':kilojoule,'output_line':output_line}
         else:
             #fail to process
             result = {'status':'fail','voltages_csv_file': voltages_csv_name,'p_byPhase_csv_file': p_byPhases_csv_name,'output_lv':data_lv,'output_pcc':data_pcc}
