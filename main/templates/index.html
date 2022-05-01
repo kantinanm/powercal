@@ -570,6 +570,23 @@
       }
     }
 
+    // using jQuery
+  function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie != '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = jQuery.trim(cookies[i]);
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
   $("#btnRUN").click(function (e) {
       // preventing from page reload and default actions
       e.preventDefault();
@@ -637,11 +654,16 @@
       resultPCCV3
 
       */
+      var csrftoken = getCookie('csrftoken');
       console.log("click");
-      console.log("click"+$("#txtVpu").val());
+      console.log("csrftoken : "+csrftoken);
+      //console.log("click"+$("#txtVpu").val());
+   
+
       
       var formData = {
-        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        csrfmiddlewaretoken:csrftoken,
         vpu: $("#txtVpu").val(),
         fixmvasc: $("#txtMVAsc").val(),
         tab: $("#txtTap").val(),
@@ -717,9 +739,9 @@
                 $("#resultLVV2").html(response.output_lv.V2);
                 $("#resultLVV3").html(response.output_lv.V3);
 
-                //$("#resultP1kw").html(response.output_line.V1);
-                //$("#resultP2kw").html(response.output_line.V2);
-                //$("#resultP3kw").html(response.output_line.V3);
+                $("#resultP1kw").html(response.output_line.PV1);
+                $("#resultP2kw").html(response.output_line.PV2);
+                $("#resultP3kw").html(response.output_line.PV3);
 
                 $("#resultPCCV1").html(response.output_pcc.V1);
                 $("#resultPCCV2").html(response.output_pcc.V2);

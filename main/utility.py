@@ -135,10 +135,10 @@ async def readResultPphase(p_phases_file):
     print(f'Line PV3 : {kw3},{pv3_joule}')
 
 
-    line = {'PV1': kw1, 'PV2': kw2, 'PV3': kw3}
-    kilojoule  = {'PV1': pv1_joule, 'PV2': pv2_joule, 'PV3': pv3_joule}
-    #output_line = {'PV1': kw1+", "+pv1_joule+" joule", 'PV2': kw2+", "+pv2_joule+" joule", 'PV3': kw3+", "+pv3_joule+" joule"}
-    output_line={}
+    line = {'PV1': abs(kw1), 'PV2': abs(kw2), 'PV3': abs(kw3)}
+    kilojoule  = {'PV1': abs(pv1_joule), 'PV2': abs(pv2_joule), 'PV3': abs(pv3_joule)}
+    output_line = {'PV1': str(abs(kw1))+", "+str(abs(pv1_joule))+" joule", 'PV2': str(abs(kw2))+", "+str(abs(pv2_joule))+" joule", 'PV3': str(abs(kw3))+", "+str(abs(pv3_joule))+" joule"}
+    #output_line={}
     # timer ends
     end = time.time()
     print('\nExperiment Completed\nTotal Time: {:.2f} seconds'.format(end-start))
@@ -291,13 +291,13 @@ async def callOpenDSS(data,timestamp):
 
 
     dssCircuit.Vsources.pu = 1.03
-    #dssCircuit.Vsources.pu = dict['posZero']
+    #dssCircuit.Vsources.pu = posZero
     #dssCircuit.Vsources.MVAsc3 = 500
 
     transName = "Transformer.TR01"
     dssCircuit.Transformers.Name = transName.split(".")[1]
-    #dssCircuit.Transformers.tap = dict['pos01']
-    #dssCircuit.Transformers.xhl = dict['pos02']
+    #dssCircuit.Transformers.tap = pos01
+    #dssCircuit.Transformers.xhl = pos02
     dssCircuit.Transformers.tap = 1.00
     dssCircuit.Transformers.xhl = 11.7
 
@@ -305,41 +305,41 @@ async def callOpenDSS(data,timestamp):
     dssCircuit.Lines.Name = lineName.split(".")[1]
     #dssCircuit.Lines.linecode = "THW-A"
     dssCircuit.Lines.linecode = code
-    #dssCircuit.Lines.length = dict['pos04']
+    #dssCircuit.Lines.length = pos04
     dssCircuit.Lines.length = 4
 
     loadName = "Load.H01"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = dict['pos06']
-    #dssCircuit.Loads.pf = dict['pos05']
+    #dssCircuit.Loads.kW = pos06
+    #dssCircuit.Loads.pf = pos05
     dssCircuit.Loads.kW = 2.1
     dssCircuit.Loads.pf = 0.91
 
     loadName = "Load.H02"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = dict['pos07']
-    #dssCircuit.Loads.pf = dict['pos08']
+    #dssCircuit.Loads.kW = pos07
+    #dssCircuit.Loads.pf = pos08
     dssCircuit.Loads.kW = 2.2
     dssCircuit.Loads.pf = 0.92
 
     loadName = "Load.H03"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = dict['pos09']
-    #dssCircuit.Loads.pf = dict['pos10']
+    #dssCircuit.Loads.kW = pos09
+    #dssCircuit.Loads.pf = pos10
     dssCircuit.Loads.kW = 2.3
     dssCircuit.Loads.pf = 0.93
 
     loadName = "Load.EV01"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = dict['pos11'] #-
-    #dssCircuit.Loads.pf = dict['pos12']
+    #dssCircuit.Loads.kW = pos11 #-
+    #dssCircuit.Loads.pf = pos12
     dssCircuit.Loads.kW = 2.4
     dssCircuit.Loads.pf = -0.95
 
     loadName = "Load.PV01"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = dict['pos13'] #-
-    #dssCircuit.Loads.pf = dict['pos14']
+    #dssCircuit.Loads.kW = pos13 #-
+    #dssCircuit.Loads.pf = pos14
     dssCircuit.Loads.kW = -3.0
     dssCircuit.Loads.pf = 1.0
 

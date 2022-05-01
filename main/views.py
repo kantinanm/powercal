@@ -18,7 +18,8 @@ def index(request):
 
 
 async def process_backend(request):
-    if is_ajax(request=request) and request.method == "POST":
+    #if is_ajax(request=request) and request.method == "POST":
+    if  request.method == "POST":
         # request.POST
         # request.POST.get('firstnamevalue')
         vpu = request.POST.get('vpu')
