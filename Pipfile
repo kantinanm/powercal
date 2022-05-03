@@ -12,6 +12,7 @@ numpy = "*"
 django-environ = "*"
 pandas = "*"
 
+
 [dev-packages]
 autopep8 = "*"
 
