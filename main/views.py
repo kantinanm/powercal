@@ -149,7 +149,7 @@ def process(request):
             "h03_pf": request.POST.get('h03_pf'),
             "sg03pf": request.POST.get('sg03pf'),
             "batt_kw": request.POST.get('batt_kw'),
-            "batt_pf": request.POST.get('evBattPf'),
+            "batt_pf": request.POST.get('batt_pf'),
             "sgBattPkw": request.POST.get('sgBattPkw'),
             "sgBattPF": request.POST.get('sgBattPF'),
             "evBattKw": request.POST.get('evBattKw'),

@@ -548,7 +548,12 @@ async def openDSSTicker2(data,timestamp):
 
 def openDSSTicker(data,timestamp):
     print(data)
-    print("Process openDSSTicker3")
+    print("Process openDSSTicker")
+
+    PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+    print("Root path : "+PROJECT_PATH)
+    dss_path = getattr(settings, "DSS_PATH", PROJECT_PATH+"dss") #get path
+    dss_file = getattr(settings, "DSS_FILENAME", "engine.dss") #get filename
 
     pythoncom.CoInitialize() 
     dssObj = win32com.client.Dispatch("OpenDSSEngine.DSS")
@@ -569,7 +574,7 @@ def openDSSTicker(data,timestamp):
     #raise SystemExit
 
     dssText = dssObj.Text
-    dssText.Command = r"compile 'D:\Work\Python\powercal\dss\engine.dss"
+    dssText.Command = "compile "+dss_path+dss_file
     dssCircuit = dssObj.ActiveCircuit
     dssSolution = dssCircuit.Solution
     dssElem = dssCircuit.ActiveCktElement
@@ -594,27 +599,40 @@ def openDSSTicker(data,timestamp):
         'pos08':data["h02_pf"],#sg02pf
         'pos09':data["h03_kw"],
         'pos10':data["h03_pf"],#sg03pf
-        'pos11':data["batt_kw"], #sgBattPkw
-        'pos12':data["batt_pf"], #sgBattPF
-        'pos13':data["evBattKw"], #sgEVBattPkw
-        'pos14':data["evBattPf"], #sgEVBattPF
+        'pos11':data["evBattKw"], #sgEVBattPkw
+        'pos12':data["evBattPf"], #sgEVBattPF
+        'pos13':data["batt_kw"], #sgBattPkw
+        'pos14':data["batt_pf"], #sgBattPF
     }
 
     posZero=float(dict['posZero'])
     pos01=float(dict['pos01'])
     pos02=float(dict['pos02'])
     pos04=float(dict['pos04'])
-    pos05=float(dict['pos05'])
-    pos06=float(mapSign(dict['pos06'],data["sg01pf"]))
+    pos05=float(mapSign(dict['pos06'],data["sg01pf"]))
+    pos06=float(dict['pos05'])
     pos07=float(dict['pos07'])
     pos08=float(mapSign(dict['pos08'],data["sg02pf"]))
     pos09=float(dict['pos09'])
     pos10=float(mapSign(dict['pos10'],data["sg03pf"]))
-    pos11=float(mapSign(dict['pos11'],data["sgBattPkw"]))
-    pos12=float(mapSign(dict['pos12'],data["sgBattPF"]))
-    pos13=float(mapSign(dict['pos13'],data["sgEVBattPkw"]))
-    pos14=float(mapSign(dict['pos14'],data["sgEVBattPF"]))
-
+    pos11=float(mapSign(dict['pos11'],data["sgEVBattPkw"]))
+    pos12=float(mapSign(dict['pos12'],data["sgEVBattPF"]))
+    pos13=float(mapSign(dict['pos13'],data["sgBattPkw"]))
+    pos14=float(mapSign(dict['pos14'],data["sgBattPF"]))
+    #posZero = 1.03
+    #pos01 = 1.00
+    #pos02 = 11.7
+    #pos04 = 4
+    #pos05 = 0.91
+    #pos06 = 2.1
+    #pos07 = 2.2
+    #pos08 = 0.92
+    #pos09 = 2.3
+    #pos10 = 0.93
+    #pos11 = 2.4
+    #pos12 = -0.95
+    #pos13 =-3.0
+    #pos14 =1.0
     #debug
     print(f'pos-Zero value is: {posZero}')
     print(f'pos-01 value is: {pos01}')
@@ -640,58 +658,58 @@ def openDSSTicker(data,timestamp):
     print("type is "+code)
 
 
-    dssCircuit.Vsources.pu = 1.03
-    #dssCircuit.Vsources.pu = posZero
+    #dssCircuit.Vsources.pu = 1.03
+    dssCircuit.Vsources.pu = posZero
     #dssCircuit.Vsources.MVAsc3 = 500
 
     transName = "Transformer.TR01"
     dssCircuit.Transformers.Name = transName.split(".")[1]
-    #dssCircuit.Transformers.tap = pos01
-    #dssCircuit.Transformers.xhl = pos02
-    dssCircuit.Transformers.tap = 1.00
-    dssCircuit.Transformers.xhl = 11.7
+    dssCircuit.Transformers.tap = pos01
+    dssCircuit.Transformers.xhl = pos02
+    #dssCircuit.Transformers.tap = 1.00
+    #dssCircuit.Transformers.xhl = 11.7
 
     lineName = "Line.Feeder1"
     dssCircuit.Lines.Name = lineName.split(".")[1]
     #dssCircuit.Lines.linecode = "THW-A"
     dssCircuit.Lines.linecode = code
-    #dssCircuit.Lines.length = pos04
-    dssCircuit.Lines.length = 4
+    dssCircuit.Lines.length = pos04
+    #dssCircuit.Lines.length = 4
 
     loadName = "Load.H01"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = pos06
-    #dssCircuit.Loads.pf = pos05
-    dssCircuit.Loads.kW = 2.1
-    dssCircuit.Loads.pf = 0.91
+    dssCircuit.Loads.kW = pos06
+    dssCircuit.Loads.pf = pos05
+    #dssCircuit.Loads.kW = 2.1
+    #dssCircuit.Loads.pf = 0.91
 
     loadName = "Load.H02"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = pos07
-    #dssCircuit.Loads.pf = pos08
-    dssCircuit.Loads.kW = 2.2
-    dssCircuit.Loads.pf = 0.92
+    dssCircuit.Loads.kW = pos07
+    dssCircuit.Loads.pf = pos08
+    #dssCircuit.Loads.kW = 2.2
+    #dssCircuit.Loads.pf = 0.92
 
     loadName = "Load.H03"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = pos09
-    #dssCircuit.Loads.pf = pos10
-    dssCircuit.Loads.kW = 2.3
-    dssCircuit.Loads.pf = 0.93
+    dssCircuit.Loads.kW = pos09
+    dssCircuit.Loads.pf = pos10
+    #dssCircuit.Loads.kW = 2.3
+    #dssCircuit.Loads.pf = 0.93
 
     loadName = "Load.EV01"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = pos11 #-
-    #dssCircuit.Loads.pf = pos12
-    dssCircuit.Loads.kW = 2.4
-    dssCircuit.Loads.pf = -0.95
+    dssCircuit.Loads.kW = pos11 #-
+    dssCircuit.Loads.pf = pos12
+    #dssCircuit.Loads.kW = 2.4
+    #dssCircuit.Loads.pf = -0.95
 
     loadName = "Load.PV01"
     dssCircuit.Loads.Name = loadName.split(".")[1]
-    #dssCircuit.Loads.kW = pos13 #-
-    #dssCircuit.Loads.pf = pos14
-    dssCircuit.Loads.kW = -3.0
-    dssCircuit.Loads.pf = 1.0
+    dssCircuit.Loads.kW = pos13 #-
+    dssCircuit.Loads.pf = pos14
+    #dssCircuit.Loads.kW = -3.0
+    #dssCircuit.Loads.pf = 1.0
 
 
     #dssText.Command = "Show Powers [kVA] [Elements]"
