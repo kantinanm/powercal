@@ -418,6 +418,15 @@
 
                       <div class="flex flex-wrap items-baseline -mx-3 mb-2">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">Q1(kVar)=</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultQ1kvar" class="text-indigo-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                           <span class="text-orange-700">P2(kW) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
@@ -427,10 +436,28 @@
 
                       <div class="flex flex-wrap items-baseline -mx-3 mb-2">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">Q2(kVar)=</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultQ2kvar" class="text-indigo-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                           <span class="text-orange-700">P3(kW) =</span>
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                         <div id ="resultP3kw" class="text-indigo-700 text-lg">  ? </div>
+                        </div>
+                      </div>
+
+                      <div class="flex flex-wrap items-baseline -mx-3 mb-2">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                          <span class="text-orange-700">Q3(kVar)=</span>
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                        <div id ="resultQ3kvar" class="text-indigo-700 text-lg">  ? </div>
                         </div>
                       </div>
                     </div>
@@ -471,8 +498,21 @@
                       </div>
                     </div>
                   </div><!-- col1 -->
+                </div><!--  grid grid-cols-3-->
+
+                <div class="flex flex-row">
+                  <div class="basis-1/1  mb-2 px-4"><span class="text-xl text-purple-800 mt-3">Ploss(kW)</span></div>
+                  <div class="basis-1/5"><div id ="resultPloss" class="text-indigo-700 text-lg">  ? </div></div>
                 </div>
+
+                <div class="flex flex-row">
+                  <div class="basis-1/1  mb-2 px-4"><span class="text-xl text-purple-800 mt-3">Qloss(kVar)</span></div>
+                  <div class="basis-1/5"><div id ="resultQloss" class="text-indigo-700 text-lg">  ? </div></div>
+                </div>
+
               </div>
+
+
             </div>
           </div>
 
@@ -747,13 +787,20 @@
                 $("#resultLVV2").html(response.output_lv.V2);
                 $("#resultLVV3").html(response.output_lv.V3);
 
-                $("#resultP1kw").html(response.output_line.PV1);
-                $("#resultP2kw").html(response.output_line.PV2);
-                $("#resultP3kw").html(response.output_line.PV3);
+                $("#resultP1kw").html(response.line.PV1);
+                $("#resultP2kw").html(response.line.PV2);
+                $("#resultP3kw").html(response.line.PV3);
+
+                $("#resultQ1kvar").html(response.kilojoule.PV1);
+                $("#resultQ2kvar").html(response.kilojoule.PV2);
+                $("#resultQ3kvar").html(response.kilojoule.PV3);
 
                 $("#resultPCCV1").html(response.output_pcc.V1);
                 $("#resultPCCV2").html(response.output_pcc.V2);
                 $("#resultPCCV3").html(response.output_pcc.V3);
+
+                //resultPloss
+                //resultQloss
         
               }
 

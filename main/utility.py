@@ -906,9 +906,13 @@ def generateChart(data_lv,data_pcc,length,timestamp):
             (length, data_pcc["V1"]),  # P1
             (0.0, data_lv["V2"]),  # P2
             (length, data_pcc["V2"]),  # P3
+            (0.0, data_lv["V3"]),  # 
+            (length, data_pcc["V3"]),  # 
         ]
 
     codes = [
+            mpath.Path.MOVETO,
+            mpath.Path.MOVETO,
             mpath.Path.MOVETO,
             mpath.Path.MOVETO,
             mpath.Path.MOVETO,
