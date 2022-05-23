@@ -2,6 +2,7 @@ from datetime import datetime
 import asyncio
 import json
 #from turtle import end_fill
+import csv
 import pandas as pd
 from django.conf import settings
 import time
@@ -850,11 +851,12 @@ def readResultpByPhase(p_phases_file):
 
     #'D:/Work/OpenDSS/'+exp_voltages_file,
     #path+exp_voltages_file, 
-    df = pd.read_csv(
-        path+p_phases_file,
-        nrows=7, delimiter = ",",
-        low_memory = True
-    )
+    #df = pd.read_csv(
+    #    path+p_phases_file,
+    #    nrows=7, delimiter = ",",
+    #    low_memory = True
+    #)
+    df = pd.read_csv(path+p_phases_file)
     #df['Bus'] = df['Bus'].astype(str)
     #df['pu1'] = df['pu1'].astype(float)
     #df['pu2'] = df['pu2'].astype(float)
@@ -866,26 +868,52 @@ def readResultpByPhase(p_phases_file):
     # display information
     print('Show Infos:')
     df.info()
-    print('')
-    print('Show Top Seven Rows')
-    print(df.head(7))
+    #print(''+df.iloc[1,])
+    print('Show Top Three Rows')
+    #print(df.head(3))
 
-    kw1=df.iloc[0,3]
-    kw2=df.iloc[0,5]
-    kw3=df.iloc[0,7]
+    #kw1=df.iloc[0,3]
+    #kw2=df.iloc[0,5]
+    #kw3=df.iloc[0,7]
 
-    pv1_joule=df.iloc[0,4]
-    pv2_joule=df.iloc[0,6]
-    pv3_joule=df.iloc[0,8]
+    #pv1_joule=df.iloc[0,4]
+    #pv2_joule=df.iloc[0,6]
+    #pv3_joule=df.iloc[0,8]
+
+
+    with open(path+p_phases_file,"r") as f:
+        r = csv.DictReader(f, delimiter =";")
+        for i, line in enumerate(r):
+                #print (i)
+                if(i==0):
+                    #print (line)
+                    #print(line, "is of type", type(line))
+                    for key, value in line.items():
+                        #print(f'{key}={value}')
+                        data_raw=value
+                    print(data_raw)
+                    colData = data_raw.split(',')
+                    print(f'lenght :{len(colData)}')
+
+                
+  
+
+    kw1=convertValue(float(colData[12]))
+    kw2=convertValue(float(colData[14]))
+    kw3=convertValue(float(colData[16]))
+
+    pv1_joule=convertValue(float(colData[13]))
+    pv2_joule=convertValue(float(colData[15]))
+    pv3_joule=convertValue(float(colData[17]))
 
     print(f'Line PV1 : {kw1},{pv1_joule}')
     print(f'Line PV2 : {kw2},{pv2_joule}')
     print(f'Line PV3 : {kw3},{pv3_joule}')
 
 
-    line = {'PV1': abs(kw1), 'PV2': abs(kw2), 'PV3': abs(kw3)}
-    kilojoule  = {'PV1': abs(pv1_joule), 'PV2': abs(pv2_joule), 'PV3': abs(pv3_joule)}
-    output_line = {'PV1': str(abs(kw1))+", "+str(abs(pv1_joule))+" joule", 'PV2': str(abs(kw2))+", "+str(abs(pv2_joule))+" joule", 'PV3': str(abs(kw3))+", "+str(abs(pv3_joule))+" joule"}
+    line = {'PV1': kw1, 'PV2': kw2, 'PV3': kw3}
+    kilojoule  = {'PV1': pv1_joule, 'PV2': pv2_joule, 'PV3': pv3_joule}
+    output_line = {'PV1': str(kw1)+", "+str(pv1_joule)+" joule", 'PV2': str(kw2)+", "+str(pv2_joule)+" joule", 'PV3': str(kw3)+", "+str(pv3_joule)+" joule"}
     #output_line={}
     # timer ends
     end = time.time()
@@ -968,3 +996,9 @@ def generateChart(data_lv,data_pcc,length,timestamp):
     result = {'status':'success','filename': title+".png"}
 
     return json.dumps(result)
+
+def convertValue(value):
+    if value < 0:
+        return abs(value) #เปลี่ยนลบ เป็น บวก
+    else:
+        return -abs(value) #เปลี่ยนบวก เป็น ลบ
