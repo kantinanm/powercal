@@ -925,6 +925,7 @@ def readResultpByPhase(p_phases_file):
 def generateChart(data_lv,data_pcc,length,timestamp):
     print("this call generateChart.")
     dir_name = getattr(settings, "CHART_PATH", None)
+    autoscale = getattr(settings, "AUTOSCALE", False)
     #dir_name = "D:/Work/Git/Python/powercal/static/images/"
 
     plt.rcParams["savefig.directory"] = os.chdir(os.path.dirname(dir_name))
@@ -932,37 +933,64 @@ def generateChart(data_lv,data_pcc,length,timestamp):
     verts = [
             (0.0, data_lv["V1"]),   # P0
             (length, data_pcc["V1"]),  # P1
+        ]
+    verts2 = [
             (0.0, data_lv["V2"]),  # P2
             (length, data_pcc["V2"]),  # P3
+        ]
+    verts3 = [
             (0.0, data_lv["V3"]),  # 
             (length, data_pcc["V3"]),  # 
         ]
 
     codes = [
             mpath.Path.MOVETO,
+            mpath.Path.LINETO,
+        ]
+    
+    codes2 = [
             mpath.Path.MOVETO,
+            mpath.Path.LINETO,
+        ]
+    
+    codes3 = [
             mpath.Path.MOVETO,
-            mpath.Path.MOVETO,
-            mpath.Path.MOVETO,
-            mpath.Path.MOVETO,
+            mpath.Path.LINETO,
         ]
 
     path = mpath.Path(verts, codes)
+    path2 = mpath.Path(verts2, codes2)
+    path3 = mpath.Path(verts3, codes3)
 
     fig, ax = plt.subplots()
     patch = patches.PathPatch(path, facecolor='none', lw=2)
+    patch2 = patches.PathPatch(path2, facecolor='none', lw=2)
+    patch3 = patches.PathPatch(path3, facecolor='none', lw=2)
+
     ax.add_patch(patch)
+    ax.add_patch(patch2)
+    ax.add_patch(patch3)
+
     ax.grid()
 
     xs, ys = zip(*verts)
-    ax.plot(xs, ys, 'x--', lw=2, color='black', ms=10)
+    ax.plot(xs, ys, '', lw=2, color='red', ms=10)
+
+    xs2, ys2 = zip(*verts2)
+    ax.plot(xs2, ys2, '', lw=2, color='yellow', ms=10)
+
+    xs3, ys3 = zip(*verts3)
+    ax.plot(xs3, ys3, '', lw=2, color='blue', ms=10)
 
     #ax.set_aspect('auto')
     #ax.set_xlim(xmin=0.0, xmax=pos04)
-    ax.set_ybound(lower=0.9, upper=1.1)
-    ax.set_xbound(lower=0.0, upper=length)
-    #ax.set_xlim(-0.1, 1.1)
-    #ax.set_ylim(-0.1, 1.1)
+    
+    if(autoscale):
+        ax.set_aspect('auto')
+    else:
+        ax.set_ybound(lower=0.9, upper=1.1)
+        ax.set_xbound(lower=0.0, upper=length)
+
 
     #plt.style.use('seaborn-whitegrid')
     #xpoints = np.array([0, 6])
