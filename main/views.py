@@ -185,7 +185,7 @@ def process(request):
             with open(image_path+json_object["filename"], "rb") as image_file:
                 image_data = base64.b64encode(image_file.read()).decode('utf-8')
               # return result to json format
-                return JsonResponse({"success": "test", "data": postData,"output_lv": json_object["output_lv"],"output_pcc": json_object["output_pcc"],"line": json_object["line"],"kilojoule": json_object["kilojoule"],"output_line": json_object["output_line"],  "fileName": json_object["filename"], "raw": image_data}, status=200)
+                return JsonResponse({"success": "ok", "data": postData,"output_lv": json_object["output_lv"],"output_pcc": json_object["output_pcc"],"line": json_object["line"],"kilojoule": json_object["kilojoule"],"output_line": json_object["output_line"],"losses": json_object["losses"],"output_pq": json_object["output_pq"],  "fileName": json_object["filename"], "raw": image_data}, status=200)
 
         else:
                 print("Problem in call open dss ")

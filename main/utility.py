@@ -726,10 +726,12 @@ def openDSSTicker(data,timestamp):
     voltages_csv_name='EXP_VOLTAGES_'+timestamp+'.CSV'
     power_csv_name='EXP_POWERS_'+timestamp+'.CSV'
     p_byPhases_csv_name='EXP_P_ByPhase_'+timestamp+'.CSV'
+    losses_csv_name='losses_'+timestamp+'.CSV'
     
     dssText.command = "Export Powers [kVA] ["+power_csv_name+"]"
     dssText.command = "Export Voltage ["+voltages_csv_name+"]"
     dssText.command = "Export P_ByPhase [kVA] ["+p_byPhases_csv_name+"]"
+    dssText.command = "Export Losses ["+losses_csv_name+"]"
 
 
     print("GetInterfaceCount()")
@@ -771,18 +773,30 @@ def openDSSTicker(data,timestamp):
             kilojoule=resultByPhase["kilojoule"]
             output_line=resultByPhase["output_line"]
 
-            ####### read excel to generate chart #######
-            raw_json = generateChart(data_lv,data_pcc,pos04,timestamp)
-            chart_output_json = json.loads(raw_json)
-            
-            chartFileName=chart_output_json["filename"]
+            resultLosses =readResultLosses(losses_csv_name)
+            lossesData = json.loads(resultLosses)
 
-            if(chart_output_json["status"]=="success"):
-                print("generate chart completed.")
-            else:
-                print("error to generate chart.!")
+            if(lossesData["status"]):
+                output_losses=lossesData["output_losses"]
+                output_pq=lossesData["output_pq"]
+                print("result is OK : back form readResultLosses() ,Utility")
+                print("You can see.")
+                print(lossesData["output_losses"])
+                print(lossesData["output_pq"])
+
+
+                ####### read excel to generate chart #######
+                raw_json = generateChart(data_lv,data_pcc,pos04,timestamp)
+                chart_output_json = json.loads(raw_json)
+                
+                chartFileName=chart_output_json["filename"]
+
+                if(chart_output_json["status"]=="success"):
+                    print("generate chart completed.")
+                else:
+                    print("error to generate chart.!")
         
-        result = {"status": "success", "filename": chartFileName, "voltages_csv_file": voltages_csv_name, "p_byPhase_csv_file": p_byPhases_csv_name, "output_lv": data_lv, "output_pcc": data_pcc, "line": line, "kilojoule": kilojoule, "output_line": output_line}
+                result = {"status": "success", "filename": chartFileName, "voltages_csv_file": voltages_csv_name, "p_byPhase_csv_file": p_byPhases_csv_name, "output_lv": data_lv, "output_pcc": data_pcc, "line": line, "kilojoule": kilojoule, "output_line": output_line,"losses": output_losses,"output_pq": output_pq}
 
     else:
         result = {"status": "read fail"}
@@ -1030,3 +1044,53 @@ def convertValue(value):
         return abs(value) #เปลี่ยนลบ เป็น บวก
     else:
         return -abs(value) #เปลี่ยนบวก เป็น ลบ
+    
+def readResultLosses(exp_losses_file):
+    print("this process for read data from "+exp_losses_file+" file.")
+    path = getattr(settings, "CSV_PATH", None) #get path
+
+    #'D:/Work/OpenDSS/'+exp_voltages_file,
+    #path+exp_voltages_file, 
+    df = pd.read_csv(
+        path+exp_losses_file,
+        nrows=3, delimiter = ",",
+        low_memory = True
+    )
+
+    #df['Bus'] = df['Bus'].astype(str)
+    #df['pu1'] = df['pu1'].astype(float)
+    #df['pu2'] = df['pu2'].astype(float)
+    #df['pu3'] = df['pu3'].astype(float)
+
+    print('Method 2: Starting Experiment')
+    # timer starts
+    start = time.time()
+    # display information
+    print('Show Infos:')
+    df.info()
+    print('')
+    print('Show Top Three Rows')
+    print(df.head(3))
+
+    p_loss_data=df.iloc[1,1]
+    q_loss_data=df.iloc[1,2]
+
+    print(f'P: p_loss_value : {p_loss_data}')
+    print(f'Q: q_loss_value : {q_loss_data}')
+
+    p_loss=p_loss_data/1000
+    q_loss=q_loss_data/1000
+
+    print(f'P_Losses : {p_loss}')
+    print(f'Q_Losses : {q_loss}')
+
+    PQ = {'P': p_loss_data, 'Q': q_loss_data}
+    Losses = {'p_loss': p_loss, 'q_loss': q_loss}
+
+
+    # timer ends
+    end = time.time()
+    print('\nExperiment Completed\nTotal Time: {:.2f} seconds'.format(end-start))
+
+    result = {'status': True,'output_pq':PQ,'output_losses':Losses}
+    return json.dumps(result)
