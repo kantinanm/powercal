@@ -1,0 +1,53 @@
+ClearAll
+
+Set DefaultBaseFrequency=50
+
+New circuit.example basekV=22 pu=1.03 angle=0 frequency=50 phase=3 MVAsc3=500
+
+New Transformer.TR01 phases=3 windings=2 buses=(Sourcebus, LV) conns=(Delta wye) kvs=(22, 0.4) kvas=(250, 250) tap=1.0 xhl=11.7
+
+New Linecode.THW-A  nphases=3 R1=0.3209 X1=0.2347 R0=0.9 X0=0.7 units=km
+New Linecode.NYY  nphases=3 R1=0.15 X1=0.08 R0=0.3 X0=0.24 units=km
+
+New Line.Feeder1 bus1=LV bus2=PCC length=3 linecode=THW-A
+
+New Load.H01 bus1=PCC.1 phases=1 Model=1 kV=0.23 kW=1.0 pf=0.95
+New Load.H02 bus1=PCC.2 phases=1 Model=1 kV=0.23 kW=1.0 pf=0.95
+New Load.H03 bus1=PCC.3 phases=1 Model=1 kV=0.23 kW=1.0 pf=0.95
+
+New Load.EV01 bus1=PCC.1 phases=1 Model=1 kV=0.23 kW=3 pf=1.0
+
+New Load.PV01 bus1=PCC.1 phases=1 Model=1 kV=0.23 kW=0.00 pf=1.0
+
+!Monitor
+
+!New EnergyMeter.Feeder1  Element=Line.Feeder1 Terminal=1
+New EnergyMeter.TR1  Element=Transformer.TR01 Terminal=1
+
+Set voltagebases=(22, 0.4)
+
+Set algorithm=Newton
+
+Calcvoltagebases
+
+!Solve
+
+!Set normvminpu = 0.9
+!Set normvmaxpu = 1.1
+!Plot profile phases=all thickness = 10 label=y
+
+!Export Profile phases=all
+!Export Powers [kVA]
+!Export Voltages
+
+!Show Voltages [LN] [Elements]
+!Show Powers [kVA] [Elements]
+
+!SetBusXY Bus = Sourcebus X=0 Y=100
+!SetBusXY Bus = LV X=200 Y=100
+!SetBusXY Bus = PCC X=600 Y=100
+
+!ClearBusMarkers
+!AddBusMarker Bus=LV code=16 color=Red size=30
+!AddBusMarker Bus=PCC code=16 color=Red size=30
+!Plot circuit label=y
