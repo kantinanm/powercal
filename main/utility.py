@@ -513,40 +513,6 @@ async def openDSSTickerDemo(data):
     result = {"status": "success", "filename": "chart_05032022_093829.png", "voltages_csv_file": "EXP_VOLTAGES_05032022_093829.CSV", "p_byPhase_csv_file": "EXP_P_ByPhase_05032022_093829.CSV", "output_lv": {"V1": 1.0296, "V2": 1.0285, "V3": 1.0284}, "output_pcc": {"V1": 1.0127, "V2": 0.94672, "V3": 0.9401}, "line": {"PV1": 1.521, "PV2": 2.391, "PV3": 2.445}, "kilojoule": {"PV1": 0.207, "PV2": 1.009, "PV3": 1.071}, "output_line": {"PV1": "1.521, 0.207 joule", "PV2": "2.391, 1.009 joule", "PV3": "2.445, 1.071 joule"}}
     return json.dumps(result)
 
-async def openDSSTicker2(data,timestamp):
-    print(data)
-    print("Process callOpenDSS")
-    #pythoncom.CoInitialize() 
-    #dssObj = win32com.client.Dispatch("OpenDSSEngine.DSS")
-    #DSSStart = dssObj.Start("0")
-    #if DSSStart:
-    #    print("OpenDSS Engine started successfully")
-    #else:
-    #    print("Unable to start the OpenDSS Engine")
-    
-    #try:
-    #    pythoncom.CoInitialize() 
-    #    DSSObj = win32com.client.Dispatch("OpenDSSEngine.DSS")
-
-
-    #except:
-    #    print 
-    #    "Unable to start the OpenDSS Engine"
-    #raise SystemExit
-
-    dss.use_com_compat()
-    dss_engine = dss.DSS
-
-    dss_engine.Text.Command = "compile D:/Work/Python/powercal/dss/engine.dss"
-    dss_engine.ActiveCircuit.Solution.Solve()
-    voltages = dss_engine.ActiveCircuit.AllBusVolts
-
-
-    
-    result = {"status": "success", "filename": "chart_05032022_093829.png", "voltages_csv_file": "EXP_VOLTAGES_05032022_093829.CSV", "p_byPhase_csv_file": "EXP_P_ByPhase_05032022_093829.CSV", "output_lv": {"V1": 1.0296, "V2": 1.0285, "V3": 1.0284}, "output_pcc": {"V1": 1.0127, "V2": 0.94672, "V3": 0.9401}, "line": {"PV1": 1.521, "PV2": 2.391, "PV3": 2.445}, "kilojoule": {"PV1": 0.207, "PV2": 1.009, "PV3": 1.071}, "output_line": {"PV1": "1.521, 0.207 joule", "PV2": "2.391, 1.009 joule", "PV3": "2.445, 1.071 joule"}}
-    return json.dumps(result)
-
-
 def openDSSTicker(data,timestamp):
     print(data)
     print("Process openDSSTicker")
