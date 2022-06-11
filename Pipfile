@@ -11,7 +11,8 @@ matplotlib = "*"
 numpy = "*"
 django-environ = "*"
 pandas = "*"
-
+openpyxl = "*"
+waitress = "*"
 
 [dev-packages]
 autopep8 = "*"
