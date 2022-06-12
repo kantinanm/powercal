@@ -31,7 +31,18 @@
         <!-- Global navigation -->
       
         <!-- END Global navigation -->
-      
+        <div class="flex flex-wrap justify-center space-x-2 items-end">
+          <span
+          class="mx-4 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+          <img class="rounded-full w-14 h-14 max-w-none" alt="A"
+            src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" />
+          <span class="flex items-center px-3 py-2">
+            Piyadanai Pachanapan<br/>piyadanip@nu.ac.th
+          </span>
+          <span></span>
+
+        </span>
+        </div>
       </header>
       
       <div class="relative  md:flex ">
@@ -77,6 +88,7 @@
           </nav>
          <!-- nav -->
         
+
         </div>
        <!-- sidebar -->
       
@@ -510,6 +522,20 @@
       <!-- content 2 Grid -->
 
       </div><!-- relative md:flex-->
+
+      <footer class="text-center text-black" >
+        <div class="container">
+          <div class="">
+            <p class="flex justify-center items-center">
+              <span class="mr-1">Power by OpenDSS, TailwindCSS</span>
+            </p>
+          </div>
+        </div>
+        <div class="text-right p-4 text-white bg-gradient-to-r from-pink-300  via-purple-300  to-indigo-400 " >
+          © 2022 Copyright and Supported by Faculty of Engineering, Naresuan University.
+        </div>
+      </footer>
+
       <form >
         {% csrf_token %}
       </form>
