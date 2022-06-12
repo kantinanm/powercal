@@ -23,7 +23,7 @@ import matplotlib.path as mpath
 #import matplotlib.text as text
 import matplotlib.patches as patches
 
-#import numpy as np
+import numpy as np
 #import base64
 import os
 #from io import BytesIO
@@ -821,11 +821,17 @@ def readResultLosses(exp_losses_file):
     p_loss=p_loss_data/1000
     q_loss=q_loss_data/1000
 
+    p_l_digi=np.format_float_positional(p_loss, unique=False, precision=3)
+    q_l_digi=np.format_float_positional(q_loss, unique=False, precision=3)
+
     print(f'P_Losses : {p_loss}')
     print(f'Q_Losses : {q_loss}')
 
+    print(f'P_Losses format : {p_l_digi}')
+    print(f'Q_Losses format : {q_l_digi}')
+
     PQ = {'P': p_loss_data, 'Q': q_loss_data}
-    Losses = {'p_loss': p_loss, 'q_loss': q_loss}
+    Losses = {'p_loss': p_l_digi, 'q_loss': q_l_digi}
 
 
     # timer ends

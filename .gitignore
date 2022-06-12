@@ -19,9 +19,10 @@ media
 main/__pycache__/
 main/**/__pycache__/
 
-static/css/style.css
-static/css/style.min.css
-static/images/solve/
+static/css/*
+static/css/*
+static/images/solve/*
+static/js/*
 
 
 
